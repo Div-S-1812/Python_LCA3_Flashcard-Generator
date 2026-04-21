@@ -31,7 +31,6 @@ def create_new_set():
     dispText=Label(window1, text="Edit your sets of flashcards")
     dispText.pack(pady=10)
     Label(window1, text="Enter the desired name of your set: ").pack(pady=5)
-    create_db()
     setName=Entry(window1)
     setName.pack(pady=10)
     
@@ -188,7 +187,7 @@ def review_flash_cards():
 
 #creating root window 
 root=Tk()
-
+create_db()
 #root title &dim
 root.title("Flash Card Generator")
 root.geometry('750x550')

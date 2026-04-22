@@ -139,7 +139,7 @@ def review_flash_cards():
     #function to display question
     def disp_Q_next(): 
         global indx
-        if indx<len(Questions):
+        if indx<len(Questions)-1:
             indx+=1
             dispText.config(text=Questions[indx])
         else: 
@@ -157,12 +157,15 @@ def review_flash_cards():
         
                 
     def disp_Ans():
-        conn=sqlite3.connect('D:\\Sem4_Lab\\Python\\Python_Programs\\LCA3\\Python_LCA3_Flashcard-Generator\\flashcard.db')
-        cursor=conn.cursor()
-        cursor.execute('SELECT Answer FROM flashCardDirectory WHERE Question=? AND setID=?', (Questions[indx], setID, ))
-        ans=cursor.fetchone()
-        dispText.config(text=ans)
-        conn.close()
+        if(-1<indx<len(Questions)):
+            conn=sqlite3.connect('D:\\Sem4_Lab\\Python\\Python_Programs\\LCA3\\Python_LCA3_Flashcard-Generator\\flashcard.db')
+            cursor=conn.cursor()
+            cursor.execute('SELECT Answer FROM flashCardDirectory WHERE Question=? AND setID=?', (Questions[indx], setID, ))
+            ans=cursor.fetchone()
+            dispText.config(text=ans)
+            conn.close()
+        else:
+            dispText.config(text="All Done")
 
     setName=StringVar()
     setName.set("Select the set name: ")
